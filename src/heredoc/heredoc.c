@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:01:42 by ajelloul          #+#    #+#             */
-/*   Updated: 2025/06/25 10:55:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/25 11:03:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	child_process(t_minibash *bash, t_env **env, t_heredoc *herdoc)
 		WIFEXITED(status): Checks if the child exited
 		normally (not killed by a signal)
 
-		WEXITSTATUS(status): Extracts the exit status
+		WEXITSTATUS(status): Extracts extracts the exit code of a child process
 		(only valid if WIFEXITED is true)
 
 		WIFSIGNALED(status): Checks if the child was terminated by a signal
@@ -61,7 +61,7 @@ void	child_process(t_minibash *bash, t_env **env, t_heredoc *herdoc)
 
 		*signal(SIGINT, sigint_handler)
 			After heredoc is finished, we restore the original signal behavior
-			
+
 
 */
 
