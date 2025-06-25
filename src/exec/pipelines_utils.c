@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipelines_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajelloul <ajelloul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:56:50 by ajelloul          #+#    #+#             */
-/*   Updated: 2025/06/22 14:20:33 by ajelloul         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:30:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,16 @@ void	cleanup_pipe_resources(t_pipe *pi_pe)
 	}
 }
 
-void	exec_signal(int sign_al)
+/**
+ * Handles SIGQUIT (Ctrl+\) signal in child process
+ * Prints "Quit: 3" and optionally ignores further SIGQUIT signals
+*/
+
+void	handle_sigquit(int signum)
 {
-	if (sign_al == SIGQUIT)
+	if (signum == SIGQUIT)
 	{
+		write(1, "Quit: 3\n", 8);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }
