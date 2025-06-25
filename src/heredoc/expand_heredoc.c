@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajelloul <ajelloul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 10:13:35 by ajelloul          #+#    #+#             */
-/*   Updated: 2025/06/24 17:12:51 by ajelloul         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:04:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ char	*ft__expand(t_minibash *bash, t_env **env, char *str)
 }
 
 /*
+
+	loops : $MY_VAR
+
 	This function handles variable names after '$' inside a heredoc line
-	
+
 	Loop to calculate the length of a valid variable name
 */
 
