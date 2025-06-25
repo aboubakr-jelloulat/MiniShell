@@ -3,49 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajelloul <ajelloul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:01:42 by ajelloul          #+#    #+#             */
-/*   Updated: 2025/06/22 12:15:42 by ajelloul         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:32:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*expand(t_minibash *bash, t_env **env, char *str)
-{
-	t_expand_heredoc	ex;
-
-	ex.index = 0;
-	while (env && str[ex.index])
-	{
-		if (search("$\"\"", str))
-			return (ex.s = ft_strdup(""), ex.s);
-		else if (str[ex.index] == '$')
-		{
-			if (str[ex.index + 1] && str[ex.index + 1] == '?')
-				return (ex.expanded_line = ft_itoa(bash->exit_status),
-					ex.s = ft_strdup(ex.expanded_line),
-					free(ex.expanded_line), ex.s);
-			ex.index++;
-			if (!str[ex.index])
-				return (ex.s = ft_strdup("$"), ex.s);
-			if (str[ex.index] == '\"' || str[ex.index] == '\'')
-				return (ex.s = ft_strdup(""), ex.s);
-			if (!ft_isalnum(str[ex.index]) || ft_isdigit(str[ex.index]))
-				return (ex.s);
-			lookup_env_var(env, str, &ex.s, &ex.index);
-		}
-		ex.index++;
-	}
-	return (ex.s);
-}
-
 /*
 	signal(SIGINT, SIG_DFL) :
 		If user presses Ctrl+C  we should stop heredoc and return to the shell
 			 not exit the entire shell
-	
+
 	signal(SIGQUIT, SIG_IGN) :
 		If user presses Ctrl+\ it should be ignored like in bash
 */
@@ -77,7 +48,7 @@ void	child_process(t_minibash *bash, t_env **env, t_heredoc *herdoc)
 }
 
 /*
-	Signals : 
+	Signals :
 		WIFEXITED(status): Checks if the child exited
 		normally (not killed by a signal)
 
@@ -94,7 +65,7 @@ void	child_process(t_minibash *bash, t_env **env, t_heredoc *herdoc)
 	SIGINT 	= This is the signal sent when you press Ctrl+C in your terminal
 	SIG_IGN = This is a special flag that means "ignore this signal"
 
-	my code : If the user presses Ctrl+C, 
+	my code : If the user presses Ctrl+C,
 		ignore it completely and continue whatever you were doing
 */
 
@@ -154,7 +125,7 @@ int	process_her_with_signals(t_minibash *bash, t_env **env, t_cmd *cmd)
 
 	SIGINT : Represents Ctrl+C (signal number 2)
 
-	my code checkk: if (WTERMSIG(st) == SIGINT) 
+	my code checkk: if (WTERMSIG(st) == SIGINT)
 		detects if heredoc processing was interrupted by Ctrl+C
 
 */
