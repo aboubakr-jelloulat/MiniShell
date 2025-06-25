@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:01:42 by ajelloul          #+#    #+#             */
-/*   Updated: 2025/06/25 10:32:15 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/25 10:55:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ void	child_process(t_minibash *bash, t_env **env, t_heredoc *herdoc)
 
 		WIFSIGNALED(status): Checks if the child was terminated by a signal
 
-		WTERMSIG(status): Gets the signal number that caused termination
+		WTERMSIG(status): Gets the signal number Ctrl+C
+
+		*signal(SIGINT, sigint_handler)
+			After heredoc is finished, we restore the original signal behavior
+			
 
 */
 
@@ -65,8 +69,9 @@ void	child_process(t_minibash *bash, t_env **env, t_heredoc *herdoc)
 	SIGINT 	= This is the signal sent when you press Ctrl+C in your terminal
 	SIG_IGN = This is a special flag that means "ignore this signal"
 
-	my code : If the user presses Ctrl+C,
-		ignore it completely and continue whatever you were doing
+	Tells the parent to ignore Ctrl+C (SIGINT) during the heredoc input phase
+	Because if the user presses Ctrl+C, we want only the child process to stop
+		 not the entire shell
 */
 
 int	fork_heredoc(t_minibash *bash, t_env **env, t_heredoc *herdoc)
