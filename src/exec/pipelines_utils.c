@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipelines_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ajelloul <ajelloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:56:50 by ajelloul          #+#    #+#             */
-/*   Updated: 2025/06/25 12:30:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/25 20:13:10 by ajelloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	handle_sigquit(int signum)
 {
 	if (signum == SIGQUIT)
 	{
-		write(1, "Quit: 3\n", 8);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }

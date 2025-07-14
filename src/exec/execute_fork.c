@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_fork.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ajelloul <ajelloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 12:24:24 by ajelloul          #+#    #+#             */
-/*   Updated: 2025/06/25 12:46:43 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/25 19:47:26 by ajelloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	handle_heredoc_input(t_cmd *cmd)
 		free(file);
 		exit(1);
 	}
-	// if (dup2(fd, 0) < 0)
-	// {
-	// 	free(file);
-	// 	exit(1);
-	// }
+	if (dup2(fd, 0) < 0)
+	{
+		free(file);
+		exit(1);
+	}
 	free(file);
 	close(fd);
 	return (fd);

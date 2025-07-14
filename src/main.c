@@ -5,21 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajelloul <ajelloul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 10:40:45 by achoukri          #+#    #+#             */
-/*   Updated: 2025/06/24 17:15:43 by ajelloul         ###   ########.fr       */
+/*   Created: 2025/06/25 19:48:10 by ajelloul          #+#    #+#             */
+/*   Updated: 2025/06/29 00:26:55 by ajelloul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/*
-	1 - prints a newline
-	2 - tells readline We're on a new line now
-	3 - This clears the current input line
-		and Replace input buffer with an empty string
-		0 means don’t keep the old content
-	4 - This reprints the shell prompt and displays the cleared line
-*/
 
 void	sigint_handler(int signum)
 {
@@ -42,11 +33,6 @@ void	execute_command_pipeline(t_minibash *bash, t_env **env,
 	free_cmd_list(cmd);
 	free_lexer(&token);
 }
-
-/*
-	if (!isatty(STDIN_FILENO))
-    	rl_outstream = stdin;
-*/
 
 void	ft_readline(t_minibash	*bash, t_token *tokens, t_cmd *cmd, t_env **env)
 {
@@ -87,9 +73,6 @@ static void	init_minibash(t_minibash **bash)
 	(*bash)->exit_status = 0;
 	(*bash)->env = NULL;
 }
-/*
-	SIGQUIT is sent when you press Ctrl + \
-*/
 
 int	main(int ac, char **av, char **env)
 {
@@ -102,6 +85,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	tokens = NULL;
 	cmd = NULL;
+	rl_catch_signals = 0;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	init_minibash(&bash);
